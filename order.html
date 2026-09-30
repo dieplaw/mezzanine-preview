@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order — Mezzanine Cold Weather Capsule</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Order page layout — self-contained so it doesn't depend on Tailwind classes missing from the compiled styles.css */
+        .o-nav { position: sticky; top: 0; z-index: 50; }
+        .o-nav-inner { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; height: 4rem; display: flex; align-items: center; justify-content: space-between; font-size: 12px; }
+        .o-brand { font-family: 'Playfair Display', serif; font-size: 1.25rem; letter-spacing: .1em; font-weight: 700; color: #fff; }
+        .o-back { color: #a3a3a3; transition: color .2s; }
+        .o-back:hover { color: #fff; }
+
+        .o-wrap { max-width: 72rem; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
+        .o-head { text-align: center; max-width: 40rem; margin: 0 auto 3rem; }
+        .o-eyebrow { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #a3a3a3; }
+        .o-title { font-family: 'Playfair Display', serif; font-size: clamp(2.25rem, 6vw, 3.75rem); line-height: 1.05; margin: 1rem 0; }
+        .o-sub { color: #a3a3a3; font-weight: 300; font-size: 1rem; line-height: 1.6; }
+
+        .o-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: start; }
+        @media (min-width: 900px) { .o-grid { grid-template-columns: minmax(0, 1fr) 22rem; } .o-summary { position: sticky; top: 5.5rem; } }
+
+        .o-card { border-radius: 1.5rem; padding: 2rem; }
+        @media (max-width: 480px) { .o-card { padding: 1.5rem 1.25rem; } }
+        .o-step + .o-step { margin-top: 2.25rem; padding-top: 2.25rem; border-top: 1px solid #262626; }
+        .o-step-head { display: flex; align-items: baseline; gap: .75rem; margin-bottom: .35rem; }
+        .o-step-num { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: #737373; }
+        .o-step-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #fff; }
+        .o-step-note { font-size: 12px; color: #a3a3a3; font-weight: 300; margin-bottom: 1.25rem; line-height: 1.6; }
+
+        .o-row { display: grid; gap: .875rem; grid-template-columns: 1fr; }
+        .o-row + .o-row { margin-top: .875rem; }
+        @media (min-width: 560px) {
+            .o-row.c2 { grid-template-columns: 1fr 1fr; }
+            .o-row.c3 { grid-template-columns: 1fr 1fr 1fr; }
+            .o-row.c-addr { grid-template-columns: 1fr 9rem; }
+        }
+        .o-field label { display: block; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #a3a3a3; margin-bottom: .45rem; font-weight: 500; }
+        .o-field .opt { text-transform: none; letter-spacing: 0; color: #737373; font-weight: 400; }
+        .o-input { width: 100%; padding: .8rem 1rem; border-radius: .875rem; background: #171717; border: 1px solid #404040; color: #fff; font-size: 14px; font-family: inherit; transition: border-color .2s; -webkit-appearance: none; appearance: none; }
+        .o-input::placeholder { color: #737373; }
+        .o-input:focus { outline: none; border-color: #fff; }
+        .o-input[aria-invalid="true"] { border-color: #f87171; }
+        select.o-input { background-image: linear-gradient(45deg, transparent 50%, #a3a3a3 50%), linear-gradient(135deg, #a3a3a3 50%, transparent 50%); background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 2.25rem; }
+        textarea.o-input { resize: vertical; min-height: 6rem; line-height: 1.5; }
+        .o-unit { position: relative; }
+        .o-unit .o-input { padding-right: 3rem; }
+        .o-unit span { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); font-size: 12px; color: #737373; pointer-events: none; }
+        .o-err { font-size: 12px; color: #f87171; margin-top: .4rem; display: none; }
+        .o-err.show { display: block; }
+
+        .o-toggle { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem 1.1rem; border-radius: 1rem; border: 1px solid #404040; background: rgba(23,23,23,.6); cursor: pointer; transition: border-color .2s; }
+        .o-toggle:hover { border-color: #737373; }
+        .o-toggle input { width: 1.1rem; height: 1.1rem; margin-top: .15rem; accent-color: #fff; flex-shrink: 0; }
+        .o-toggle strong { display: block; color: #fff; font-weight: 500; font-size: 14px; }
+        .o-toggle small { display: block; color: #a3a3a3; font-weight: 300; font-size: 12px; margin-top: .2rem; line-height: 1.5; }
+        .o-gift { display: none; margin-top: 1rem; }
+        .o-gift.show { display: block; }
+        .o-count { text-align: right; font-size: 11px; color: #737373; margin-top: .35rem; }
+
+        .o-sum-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #fff; }
+        .o-sum-sub { font-size: 12px; color: #a3a3a3; margin-top: .25rem; font-weight: 300; }
+        .o-list { list-style: none; padding: 0; margin: 1.5rem 0; font-size: 12px; color: #d4d4d4; font-weight: 300; }
+        .o-list li { display: flex; gap: .6rem; align-items: flex-start; }
+        .o-list li + li { margin-top: .6rem; }
+        .o-list li::before { content: "✓"; color: #34d399; font-weight: 600; }
+        .o-lines { border-top: 1px solid #262626; padding-top: 1.25rem; font-size: 13px; }
+        .o-line { display: flex; justify-content: space-between; color: #a3a3a3; }
+        .o-line + .o-line { margin-top: .6rem; }
+        .o-line.total { color: #fff; font-size: 15px; font-weight: 600; border-top: 1px solid #262626; padding-top: 1rem; margin-top: 1rem; }
+        .o-line.total span:last-child { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 400; }
+        .o-ship { margin-top: 1.25rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #a3a3a3; display: flex; align-items: center; gap: .5rem; }
+        .o-ship::before { content: ""; width: 6px; height: 6px; border-radius: 99px; background: #34d399; }
+
+        .o-btn { display: block; width: 100%; margin-top: 1.5rem; background: #fff; color: #000; font-weight: 600; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; padding: 1rem 1.5rem; border-radius: 999px; border: 0; cursor: pointer; font-family: inherit; transition: background .2s, opacity .2s; }
+        .o-btn:hover { background: #e5e5e5; }
+        .o-btn:disabled { opacity: .5; cursor: wait; }
+        .o-fine { font-size: 11px; color: #737373; text-align: center; margin-top: .9rem; line-height: 1.6; }
+        .o-status { display: none; margin-top: 1rem; padding: .9rem 1rem; border-radius: .875rem; font-size: 12px; line-height: 1.55; }
+        .o-status.show { display: block; }
+        .o-status.warn { background: rgba(245,158,11,.08); border: 1px solid rgba(245,158,11,.3); color: #fcd34d; }
+        .o-status.err { background: rgba(248,113,113,.08); border: 1px solid rgba(248,113,113,.3); color: #fca5a5; }
+
+        /* Fit profile — slider measures */
+        .fp { display: grid; gap: 1rem; }
+        .fp-card { position: relative; padding: 1.25rem 1.25rem 1rem; border-radius: 1.1rem; border: 1px solid #262626; background: linear-gradient(180deg, rgba(23,23,23,.75), rgba(12,12,14,.75)); transition: border-color .25s; }
+        .fp-card:focus-within { border-color: #525252; }
+        .fp-card.invalid { border-color: rgba(248,113,113,.6); }
+        .fp-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; }
+        .fp-label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #a3a3a3; font-weight: 500; }
+        .fp-hint { display: block; margin-top: .35rem; font-size: 11px; color: #737373; font-weight: 300; letter-spacing: 0; text-transform: none; }
+        .fp-read { text-align: right; line-height: 1; }
+        .fp-main { font-family: 'Playfair Display', serif; font-size: 2.1rem; color: #fff; font-variant-numeric: lining-nums tabular-nums; transition: opacity .2s; }
+        .fp-main small { font-family: Inter, sans-serif; font-size: 12px; color: #a3a3a3; margin-left: .2rem; font-weight: 400; }
+        .fp-alt { margin-top: .45rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .08em; color: #737373; }
+        .fp-card:not(.set) .fp-main { color: #525252; }
+        .fp-card:not(.set) .fp-alt { visibility: hidden; }
+
+        .fp-ctrl { display: flex; align-items: center; gap: .75rem; margin-top: 1.1rem; }
+        .fp-step { flex-shrink: 0; width: 2rem; height: 2rem; border-radius: 99px; border: 1px solid #404040; background: transparent; color: #a3a3a3; font-size: 16px; line-height: 1; cursor: pointer; transition: all .2s; font-family: inherit; }
+        .fp-step:hover { border-color: #a3a3a3; color: #fff; }
+        .fp-track { position: relative; flex: 1; padding-bottom: 1.35rem; }
+        .fp-range { --pct: 50%; width: 100%; height: 1.5rem; margin: 0; background: transparent; -webkit-appearance: none; appearance: none; cursor: pointer; display: block; }
+        .fp-range:focus { outline: none; }
+        .fp-range::-webkit-slider-runnable-track { height: 2px; border-radius: 2px; background: linear-gradient(90deg, #e5e5e5 0 var(--pct), #333 var(--pct) 100%); }
+        .fp-range::-moz-range-track { height: 2px; border-radius: 2px; background: #333; }
+        .fp-range::-moz-range-progress { height: 2px; background: #e5e5e5; }
+        .fp-range::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; margin-top: -8px; border-radius: 99px; background: #fff; border: 4px solid #0a0a0c; box-shadow: 0 0 0 1px #fff, 0 4px 14px rgba(0,0,0,.5); transition: transform .15s; }
+        .fp-range::-moz-range-thumb { width: 10px; height: 10px; border-radius: 99px; background: #fff; border: 4px solid #0a0a0c; box-shadow: 0 0 0 1px #fff; }
+        .fp-range:active::-webkit-slider-thumb, .fp-range:focus-visible::-webkit-slider-thumb { transform: scale(1.15); }
+        .fp-card:not(.set) .fp-range::-webkit-slider-runnable-track { background: #333; }
+        .fp-card:not(.set) .fp-range::-moz-range-progress { background: transparent; }
+        .fp-card:not(.set) .fp-range::-webkit-slider-thumb { background: #737373; box-shadow: 0 0 0 1px #737373; animation: fp-pulse 2.4s ease-in-out infinite; }
+        .fp-card:not(.set) .fp-range::-moz-range-thumb { background: #737373; box-shadow: 0 0 0 1px #737373; }
+        @keyframes fp-pulse { 0%,100% { box-shadow: 0 0 0 1px #737373, 0 0 0 0 rgba(255,255,255,.25); } 50% { box-shadow: 0 0 0 1px #737373, 0 0 0 8px rgba(255,255,255,0); } }
+        .fp-ticks { position: absolute; left: 9px; right: 9px; bottom: 0; height: 1.1rem; pointer-events: none; }
+        .fp-tick { position: absolute; top: 0; transform: translateX(-50%); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; color: #525252; white-space: nowrap; }
+        .fp-tick::before { content: ""; display: block; width: 1px; height: 4px; background: #404040; margin: 0 auto 3px; }
+        @media (max-width: 480px) { .fp-tick.minor { display: none; } .fp-main { font-size: 1.8rem; } }
+        .fp-err { font-size: 12px; color: #f87171; margin-top: .25rem; display: none; }
+        .fp-err.show { display: block; }
+
+        .o-foot { padding: 3rem 1.5rem; border-top: 1px solid #171717; text-align: center; font-size: 12px; color: #525252; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+    </style>
+</head>
+<body class="editorial-grid">
+
+    <nav class="o-nav glass-nav">
+        <div class="o-nav-inner">
+            <a href="index.html" class="o-brand">MEZZANINE</a>
+            <a href="index.html" class="o-back">← Back to the capsule</a>
+        </div>
+    </nav>
+
+    <main class="o-wrap">
+        <header class="o-head">
+            <span class="o-eyebrow">Limited Production Release</span>
+            <h1 class="o-title text-gradient-serif">Order The Cold Weather Capsule</h1>
+            <p class="o-sub">Tell us a little about who's wearing it and where it's going. You'll complete payment securely on the next step.</p>
+        </header>
+
+        <form id="order-form" novalidate>
+            <div class="o-grid">
+
+                <!-- Left: details -->
+                <div class="o-card glass-panel">
+
+                    <section class="o-step">
+                        <div class="o-step-head"><span class="o-step-num">01</span><h2 class="o-step-title">Your details</h2></div>
+                        <p class="o-step-note">We'll send your order confirmation and delivery updates here.</p>
+                        <div class="o-row c2">
+                            <div class="o-field">
+                                <label for="name">Full name</label>
+                                <input class="o-input" id="name" name="name" autocomplete="name" required>
+                                <p class="o-err" data-for="name">Please enter your name.</p>
+                            </div>
+                            <div class="o-field">
+                                <label for="phone">Phone</label>
+                                <input class="o-input" id="phone" name="phone" type="tel" autocomplete="tel" required placeholder="(416) 555-0123">
+                                <p class="o-err" data-for="phone">Please enter a phone number for delivery.</p>
+                            </div>
+                        </div>
+                        <div class="o-row">
+                            <div class="o-field">
+                                <label for="email">Email</label>
+                                <input class="o-input" id="email" name="email" type="email" autocomplete="email" required>
+                                <p class="o-err" data-for="email">Please enter a valid email address.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="o-step">
+                        <div class="o-step-head"><span class="o-step-num">02</span><h2 class="o-step-title">Fit profile</h2></div>
+                        <p class="o-step-note" id="fit-note">Every piece is selected to fit the wearer. Set their height, weight and age and our team will size all 15 garments.</p>
+                        <div class="fp">
+                            <div class="fp-card" id="fp-height" data-key="height">
+                                <div class="fp-top">
+                                    <label class="fp-label" for="height">Height<span class="fp-hint">Without shoes</span></label>
+                                    <div class="fp-read" aria-hidden="true">
+                                        <div class="fp-main" id="height-main">—</div>
+                                        <div class="fp-alt" id="height-alt">&nbsp;</div>
+                                    </div>
+                                </div>
+                                <div class="fp-ctrl">
+                                    <button type="button" class="fp-step" data-dir="-1" aria-label="Decrease height">−</button>
+                                    <div class="fp-track">
+                                        <input type="range" class="fp-range" id="height" min="58" max="80" step="1" value="70">
+                                        <div class="fp-ticks" id="height-ticks"></div>
+                                    </div>
+                                    <button type="button" class="fp-step" data-dir="1" aria-label="Increase height">+</button>
+                                </div>
+                                <p class="fp-err" data-for="height">Please set height.</p>
+                            </div>
+                            <div class="fp-card" id="fp-weight" data-key="weight">
+                                <div class="fp-top">
+                                    <label class="fp-label" for="weight">Weight<span class="fp-hint">Approximate is fine</span></label>
+                                    <div class="fp-read" aria-hidden="true">
+                                        <div class="fp-main" id="weight-main">—</div>
+                                        <div class="fp-alt" id="weight-alt">&nbsp;</div>
+                                    </div>
+                                </div>
+                                <div class="fp-ctrl">
+                                    <button type="button" class="fp-step" data-dir="-1" aria-label="Decrease weight">−</button>
+                                    <div class="fp-track">
+                                        <input type="range" class="fp-range" id="weight" min="100" max="320" step="1" value="170">
+                                        <div class="fp-ticks" id="weight-ticks"></div>
+                                    </div>
+                                    <button type="button" class="fp-step" data-dir="1" aria-label="Increase weight">+</button>
+                                </div>
+                                <p class="fp-err" data-for="weight">Please set weight.</p>
+                            </div>
+                            <div class="fp-card" id="fp-age" data-key="age">
+                                <div class="fp-top">
+                                    <label class="fp-label" for="age">Age<span class="fp-hint">Helps us tune cut and styling</span></label>
+                                    <div class="fp-read" aria-hidden="true">
+                                        <div class="fp-main" id="age-main">—</div>
+                                        <div class="fp-alt" id="age-alt">&nbsp;</div>
+                                    </div>
+                                </div>
+                                <div class="fp-ctrl">
+                                    <button type="button" class="fp-step" data-dir="-1" aria-label="Decrease age">−</button>
+                                    <div class="fp-track">
+                                        <input type="range" class="fp-range" id="age" min="16" max="80" step="1" value="32">
+                                        <div class="fp-ticks" id="age-ticks"></div>
+                                    </div>
+                                    <button type="button" class="fp-step" data-dir="1" aria-label="Increase age">+</button>
+                                </div>
+                                <p class="fp-err" data-for="age">Please set age.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="o-step">
+                        <div class="o-step-head"><span class="o-step-num">03</span><h2 class="o-step-title">Gifting</h2></div>
+                        <p class="o-step-note">Ordering for someone else? We'll deliver straight to them with your message included.</p>
+                        <label class="o-toggle" for="is_gift">
+                            <input type="checkbox" id="is_gift" name="is_gift">
+                            <span><strong>This is a gift</strong><small>Fit profile and delivery address should be the recipient's.</small></span>
+                        </label>
+                        <div class="o-gift" id="gift-fields">
+                            <div class="o-row">
+                                <div class="o-field">
+                                    <label for="recipient">Recipient's name</label>
+                                    <input class="o-input" id="recipient" name="gift_recipient">
+                                    <p class="o-err" data-for="recipient">Please enter the recipient's name.</p>
+                                </div>
+                            </div>
+                            <div class="o-row">
+                                <div class="o-field">
+                                    <label for="gift_message">Gift message <span class="opt">(optional)</span></label>
+                                    <textarea class="o-input" id="gift_message" name="gift_message" maxlength="300" placeholder="Sorted for the season. Enjoy."></textarea>
+                                    <div class="o-count"><span id="msg-count">0</span>/300</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="o-step">
+                        <div class="o-step-head"><span class="o-step-num">04</span><h2 class="o-step-title" id="addr-title">Delivery address</h2></div>
+                        <p class="o-step-note">Complimentary delivery across the Greater Toronto Area.</p>
+                        <div class="o-row c-addr">
+                            <div class="o-field">
+                                <label for="street">Street address</label>
+                                <input class="o-input" id="street" name="street" autocomplete="address-line1" required>
+                                <p class="o-err" data-for="street">Please enter a street address.</p>
+                            </div>
+                            <div class="o-field">
+                                <label for="unit">Unit <span class="opt">(optional)</span></label>
+                                <input class="o-input" id="unit" name="unit" autocomplete="address-line2">
+                            </div>
+                        </div>
+                        <div class="o-row c2">
+                            <div class="o-field">
+                                <label for="city">City</label>
+                                <select class="o-input" id="city" name="city" required>
+                                    <option value="">Select…</option>
+                                    <optgroup label="Toronto"><option>Toronto</option></optgroup>
+                                    <optgroup label="Peel"><option>Mississauga</option><option>Brampton</option><option>Caledon</option></optgroup>
+                                    <optgroup label="York"><option>Vaughan</option><option>Markham</option><option>Richmond Hill</option><option>Newmarket</option><option>Aurora</option><option>King</option><option>Whitchurch-Stouffville</option><option>East Gwillimbury</option><option>Georgina</option></optgroup>
+                                    <optgroup label="Halton"><option>Oakville</option><option>Burlington</option><option>Milton</option><option>Halton Hills</option></optgroup>
+                                    <optgroup label="Durham"><option>Pickering</option><option>Ajax</option><option>Whitby</option><option>Oshawa</option><option>Clarington</option><option>Uxbridge</option><option>Scugog</option><option>Brock</option></optgroup>
+                                    <option value="outside">Outside the GTA</option>
+                                </select>
+                                <p class="o-err" data-for="city" id="city-err">Please select a city.</p>
+                            </div>
+                            <div class="o-field">
+                                <label for="postal">Postal code</label>
+                                <input class="o-input" id="postal" name="postal" autocomplete="postal-code" required placeholder="M5V 2T6" maxlength="7" style="text-transform:uppercase">
+                                <p class="o-err" data-for="postal">Please enter a valid Ontario postal code.</p>
+                            </div>
+                        </div>
+                        <div class="o-row">
+                            <div class="o-field">
+                                <label for="notes">Delivery notes <span class="opt">(optional)</span></label>
+                                <input class="o-input" id="notes" name="delivery_notes" placeholder="Buzzer code, concierge, best time to deliver">
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right: summary -->
+                <aside class="o-summary o-card glass-panel">
+                    <h2 class="o-sum-title">The Cold Weather Capsule</h2>
+                    <p class="o-sum-sub">180 looks, ready for anything. 15 high-quality garments.</p>
+                    <ul class="o-list">
+                        <li>3 Top layers + 4 Mid layers + 5 Base layers + 3 Bottom layers</li>
+                        <li>Complimentary delivery across the Greater Toronto Area</li>
+                        <li>Hard-shell carry-on for secure delivery and eco-friendly unboxing</li>
+                    </ul>
+                    <div class="o-lines">
+                        <div class="o-line"><span>Capsule</span><span>$3,999.00</span></div>
+                        <div class="o-line"><span>GTA delivery</span><span>Free</span></div>
+                        <div class="o-line"><span>HST (13%)</span><span>$519.87</span></div>
+                        <div class="o-line total"><span>Total</span><span>$4,518.87</span></div>
+                    </div>
+                    <div class="o-ship">Shipping November 2026</div>
+                    <button type="submit" class="o-btn" id="submit-btn">Continue to payment</button>
+                    <div class="o-status" id="status" role="alert"></div>
+                    <p class="o-fine">Payment is processed securely by Stripe. Prices in CAD.</p>
+                </aside>
+
+            </div>
+        </form>
+    </main>
+
+    <footer class="o-foot">© Mezzanine Apparel Co. All rights reserved. The Cold Weather Capsule Edition.</footer>
+
+    <script>
+        /* ============================================================
+           SETUP — paste your two links here before going live
+           ------------------------------------------------------------
+           STRIPE_PAYMENT_LINK: the Payment Link URL from your Stripe
+             dashboard (Payment Links → New → The Cold Weather Capsule,
+             $3,999 CAD, with HST handled by Stripe Tax or a tax rate).
+             e.g. 'https://buy.stripe.com/abc123XYZ'
+           ORDER_DETAILS_ENDPOINT: where the fit profile / address /
+             gift details are sent, e.g. a Formspree form URL
+             'https://formspree.io/f/xxxxxxx'. Stripe Payment Links can't
+             receive these fields, so they're sent here first, tagged with
+             an order reference that also appears on the Stripe payment
+             (as client_reference_id) so you can match the two.
+           ============================================================ */
+        const STRIPE_PAYMENT_LINK = '';
+        const ORDER_DETAILS_ENDPOINT = '';
+
+        const form = document.getElementById('order-form');
+        const giftBox = document.getElementById('is_gift');
+        const giftFields = document.getElementById('gift-fields');
+        const statusEl = document.getElementById('status');
+        const submitBtn = document.getElementById('submit-btn');
+        const $ = (id) => document.getElementById(id);
+
+        giftBox.addEventListener('change', () => {
+            giftFields.classList.toggle('show', giftBox.checked);
+            $('addr-title').textContent = giftBox.checked ? "Recipient's delivery address" : 'Delivery address';
+            $('fit-note').textContent = giftBox.checked
+                ? "Set the recipient's height, weight and age and our team will size all 15 garments for them."
+                : 'Every piece is selected to fit the wearer. Set their height, weight and age and our team will size all 15 garments.';
+        });
+
+        /* ---------- Fit profile sliders ---------- */
+        const ftIn = (inches) => `${Math.floor(inches / 12)}′${inches % 12}″`;
+        const MEASURES = {
+            height: {
+                main: (v) => ftIn(v),
+                alt: (v) => `${Math.round(v * 2.54)} CM`,
+                ticks: [[60, '5′0″'], [66, '5′6″', true], [72, '6′0″'], [78, '6′6″', true]]
+            },
+            weight: {
+                main: (v) => `${v}<small>lb</small>`,
+                alt: (v) => `${Math.round(v * 0.45359237)} KG`,
+                ticks: [[100, '100'], [150, '150', true], [200, '200'], [250, '250', true], [300, '300']]
+            },
+            age: {
+                main: (v) => `${v}<small>yrs</small>`,
+                alt: () => '&nbsp;',
+                ticks: [[20, '20'], [30, '30', true], [40, '40'], [50, '50', true], [60, '60'], [70, '70', true]]
+            }
+        };
+        const touched = { height: false, weight: false, age: false };
+
+        function paint(key) {
+            const el = $(key), v = Number(el.value), min = Number(el.min), max = Number(el.max);
+            el.style.setProperty('--pct', `${((v - min) / (max - min)) * 100}%`);
+            const card = $(`fp-${key}`);
+            card.classList.toggle('set', touched[key]);
+            $(`${key}-main`).innerHTML = touched[key] ? MEASURES[key].main(v) : '—';
+            $(`${key}-alt`).innerHTML = touched[key] ? MEASURES[key].alt(v) : '&nbsp;';
+            const alt = MEASURES[key].alt(v).replace('&nbsp;', '');
+            el.setAttribute('aria-valuetext', touched[key] ? `${MEASURES[key].main(v).replace(/<[^>]+>/g, ' ')}${alt ? ', ' + alt.toLowerCase() : ''}` : 'not set');
+        }
+
+        function touch(key) {
+            touched[key] = true;
+            $(`fp-${key}`).classList.remove('invalid');
+            document.querySelector(`.fp-err[data-for="${key}"]`).classList.remove('show');
+            paint(key);
+        }
+
+        Object.keys(MEASURES).forEach((key) => {
+            const el = $(key), min = Number(el.min), max = Number(el.max);
+            $(`${key}-ticks`).innerHTML = MEASURES[key].ticks
+                .map(([v, label, minor]) => `<span class="fp-tick${minor ? ' minor' : ''}" style="left:${((v - min) / (max - min)) * 100}%">${label}</span>`)
+                .join('');
+            el.addEventListener('input', () => touch(key));
+            el.addEventListener('keydown', () => { if (!touched[key]) touch(key); });
+            $(`fp-${key}`).querySelectorAll('.fp-step').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    if (touched[key]) el.value = Math.min(max, Math.max(min, Number(el.value) + Number(btn.dataset.dir)));
+                    touch(key);
+                });
+            });
+            paint(key);
+        });
+
+        $('gift_message').addEventListener('input', (e) => { $('msg-count').textContent = e.target.value.length; });
+
+        $('postal').addEventListener('blur', (e) => {
+            const v = e.target.value.toUpperCase().replace(/\s+/g, '');
+            if (v.length === 6) e.target.value = v.slice(0, 3) + ' ' + v.slice(3);
+        });
+
+        function setError(key, inputs, show, msg) {
+            const err = document.querySelector(`.o-err[data-for="${key}"]`);
+            if (err) { err.classList.toggle('show', show); if (msg) err.textContent = msg; }
+            inputs.forEach((el) => el.setAttribute('aria-invalid', show ? 'true' : 'false'));
+            return !show;
+        }
+
+        
+        function validate() {
+            const checks = [];
+            checks.push(setError('name', [$('name')], !$('name').value.trim()));
+            checks.push(setError('phone', [$('phone')], $('phone').value.replace(/\D/g, '').length < 10));
+            checks.push(setError('email', [$('email')], !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('email').value.trim())));
+            ['height', 'weight', 'age'].forEach((key) => {
+                $(`fp-${key}`).classList.toggle('invalid', !touched[key]);
+                document.querySelector(`.fp-err[data-for="${key}"]`).classList.toggle('show', !touched[key]);
+                checks.push(touched[key]);
+            });
+            checks.push(setError('recipient', [$('recipient')], giftBox.checked && !$('recipient').value.trim()));
+            checks.push(setError('street', [$('street')], !$('street').value.trim()));
+
+            const city = $('city').value;
+            checks.push(setError('city', [$('city')], !city || city === 'outside',
+                city === 'outside' ? 'This release delivers within the Greater Toronto Area only.' : 'Please select a city.'));
+
+            const postal = $('postal').value.toUpperCase().replace(/\s+/g, '');
+            checks.push(setError('postal', [$('postal')], !/^[KLMNP]\d[A-Z]\d[A-Z]\d$/.test(postal)));
+
+            return checks.every(Boolean);
+        }
+
+        function orderRef() {
+            const d = new Date();
+            const ymd = d.getFullYear().toString().slice(2) + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0');
+            const rand = Math.random().toString(36).slice(2, 7).toUpperCase();
+            return `MZ-${ymd}-${rand}`;
+        }
+
+        function showStatus(kind, html) {
+            statusEl.className = `o-status show ${kind}`;
+            statusEl.innerHTML = html;
+        }
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            statusEl.className = 'o-status';
+
+            if (!validate()) {
+                const first = document.querySelector('[aria-invalid="true"], .fp-card.invalid input');
+                if (first) { first.focus(); first.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+                return;
+            }
+
+            const ref = orderRef();
+            const data = Object.fromEntries(new FormData(form).entries());
+            data.is_gift = giftBox.checked ? 'yes' : 'no';
+            data.postal = data.postal.toUpperCase();
+            data.province = 'ON';
+            const h = Number($('height').value), w = Number($('weight').value);
+            data.height = `${ftIn(h).replace('′', "'").replace('″', '"')} (${Math.round(h * 2.54)} cm)`;
+            data.weight = `${w} lb (${Math.round(w * 0.45359237)} kg)`;
+            data.age = $('age').value;
+            data.order_reference = ref;
+            data.product = 'The Cold Weather Capsule — $3,999 CAD + HST';
+            data._subject = `New order ${ref} — ${data.name}`;
+
+            if (!STRIPE_PAYMENT_LINK || !ORDER_DETAILS_ENDPOINT) {
+                showStatus('warn', '<strong>Checkout isn’t connected yet.</strong> Add the Stripe Payment Link and order-details endpoint at the top of the script in order.html.');
+                console.log('Order details that would be sent:', data);
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Saving your details…';
+
+            try {
+                const res = await fetch(ORDER_DETAILS_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            } catch (err) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Continue to payment';
+                showStatus('err', 'We couldn’t save your order details. Please check your connection and try again.');
+                return;
+            }
+
+            const url = new URL(STRIPE_PAYMENT_LINK);
+            url.searchParams.set('prefilled_email', data.email);
+            url.searchParams.set('client_reference_id', ref);
+            submitBtn.textContent = 'Redirecting to secure checkout…';
+            window.location.href = url.toString();
+        });
+    </script>
+</body>
+</html>
