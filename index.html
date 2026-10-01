@@ -68,33 +68,36 @@
 
         <div class="relative z-10 mt-16 w-full max-w-5xl mx-auto">
             <div class="glass-panel rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden">
-                <div class="math-head text-left mb-6 flex justify-between items-end border-b border-neutral-800/80 pb-4">
-                    <div>
-                        <span class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">The Math</span>
-                        <h3 class="text-xl font-serif text-white">Strategic selection. Endless versatility.</h3>
+                <div class="math-head math-head-center mb-8 border-b border-neutral-800/80 pb-6">
+                    <span class="text-xs font-mono uppercase tracking-[0.25em] text-neutral-500">The Math</span>
+                    <h3 class="text-4xl md:text-6xl font-serif text-gradient-serif leading-tight" style="padding-bottom:.12em">Strategic selection. Endless versatility.</h3>
+                    <div class="math-equation" aria-label="3 × 4 × 5 × 3 = 180 looks for every occasion: -15°C commutes, client meetings, the office, travel days, weekend errands, dinner with the in-laws, date night, the holiday party">
+                        <span class="math-eq-formula" aria-hidden="true">3 × 4 × 5 × 3 = 180 Looks for</span>
+                        <span class="occasion-spin-window" aria-hidden="true">
+                            <span class="occasion-spin-word" data-occasions='["-15°C commutes","client meetings","the office","travel days","weekend errands","dinner with the in-laws","date night","the holiday party"]'>-15°C commutes</span>
+                        </span>
                     </div>
-                    <span class="nowrap text-xs font-mono text-amber-400">3 × 4 × 5 × 3 = 180 Looks</span>
                 </div>
-                
-                <div class="math-cards grid grid-cols-2 sm:grid-cols-4 gap-4 text-left">
+
+                <div class="math-cards grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
                     <div class="p-5 rounded-2xl bg-neutral-900/60 border border-neutral-800">
-                        <div class="text-2xl font-serif text-white">3 Top Layers</div>
+                        <div class="text-2xl font-serif text-white"><span class="text-amber-400">3×</span> Outerwear</div>
                         <div class="text-xs text-neutral-400 mt-1 font-light">Down Jacket, Wool Coat, and Wool Blazer.</div>
                         <div class="text-[10px] font-mono text-neutral-600 mt-3 uppercase">Black, Charcoal</div>
                     </div>
                     <div class="p-5 rounded-2xl bg-neutral-900/60 border border-neutral-800">
-                        <div class="text-2xl font-serif text-white">4 Mid Layers</div>
+                        <div class="text-2xl font-serif text-white"><span class="text-amber-400">4×</span> Mid Layers</div>
                         <div class="text-xs text-neutral-400 mt-1 font-light">Cashmere and Heavy Knit Sweaters, Overshirts, and Cardigans.</div>
                         <div class="text-[10px] font-mono text-neutral-600 mt-3 uppercase">Navy, Grey, Brown</div>
                     </div>
                     <div class="p-5 rounded-2xl bg-neutral-900/60 border border-neutral-800">
-                        <div class="text-2xl font-serif text-white">5 Base Layers</div>
+                        <div class="text-2xl font-serif text-white"><span class="text-amber-400">5×</span> Base Layers</div>
                         <div class="text-xs text-neutral-400 mt-1 font-light">Dress Shirts, T-shirts, and Polos.</div>
                         <div class="text-[10px] font-mono text-neutral-600 mt-3 uppercase">White, Light Blue, Moss Green, Navy, Black</div>
                     </div>
                     <div class="p-5 rounded-2xl bg-neutral-900/60 border border-neutral-800">
-                        <div class="text-2xl font-serif text-white">3 Bottom Layers</div>
-                        <div class="text-xs text-neutral-400 mt-1 font-light">Dark Denim, Corduroy, and Tech Fabric Trousers.</div>
+                        <div class="text-2xl font-serif text-white"><span class="text-amber-400">3×</span> Pants</div>
+                        <div class="text-xs text-neutral-400 mt-1 font-light">Dark Denim, Corduroy, and Tech Fabric Pants.</div>
                         <div class="text-[10px] font-mono text-neutral-600 mt-3 uppercase">Grey, Navy, Brown</div>
                     </div>
                 </div>
@@ -112,9 +115,6 @@
                 <p class="text-neutral-400 text-base md:text-lg font-light">
                     Every piece in <span class="text-white">The Cold Weather Capsule</span> works with every other piece, so whatever you reach for, you're dressed right from day to night.
                 </p>
-                <div class="occasion-row">
-                    <span>-15°C commute</span><span>Client meeting</span><span>Office</span><span>Travel day</span><span>Weekend errands</span><span>Dinner with the in-laws</span><span>Date night</span><span>Holiday party</span>
-                </div>
             </div>
 
             <div class="lookbook-panel glass-panel rounded-3xl p-6 md:p-10 space-y-8">
@@ -123,7 +123,7 @@
                     <!-- Outerwear Column -->
                     <div class="space-y-3">
                         <div class="text-xs font-mono uppercase tracking-wider text-neutral-400 flex justify-between">
-                            <span>Top Layer</span>
+                            <span>Outerwear</span>
                             <span class="text-neutral-600">(1 of 3)</span>
                         </div>
                         <div class="space-y-2" id="outerwear-selector">
@@ -201,7 +201,7 @@
                     <!-- Trousers Column -->
                     <div class="space-y-3">
                         <div class="text-xs font-mono uppercase tracking-wider text-neutral-400 flex justify-between">
-                            <span>Bottom Layer</span>
+                            <span>Pants</span>
                             <span class="text-neutral-600">(1 of 3)</span>
                         </div>
                         <div class="space-y-2" id="trouser-selector">
@@ -484,12 +484,12 @@
     <section id="order" class="py-28 px-6 relative border-t border-neutral-900">
         <div class="max-w-4xl mx-auto text-center space-y-12">
             <div class="space-y-4">
-                <span class="text-xs font-mono uppercase tracking-[0.2em] text-neutral-400">Limited Production Release</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] text-neutral-400">Launch Edition · First Release</span>
                 <h2 class="text-4xl md:text-6xl font-serif text-gradient-serif">
                     Order The Cold Weather Capsule
                 </h2>
                 <p class="text-neutral-400 text-base md:text-lg font-light max-w-xl mx-auto">
-                    Produced in limited quantities for guaranteed fit and finish.
+                    Our first edition, produced in small batches so every piece fits right and every colour works together.
                 </p>
             </div>
 
@@ -508,11 +508,11 @@
                 <div class="space-y-3 text-xs text-neutral-300 font-light">
                     <div class="flex items-center gap-3">
                         <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
-                        <span>3 Top layers + 4 Mid layers + 5 Base layers + 3 Bottom layers</span>
+                        <span>3 Outerwear + 4 Mid layers + 5 Base layers + 3 Pants</span>
                     </div>
                     <div class="flex items-center gap-3">
                         <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
-                        <span>Complimentary delivery across the Greater Toronto Area</span>
+                        <span>$100 delivery across the Greater Toronto Area, included in the price</span>
                     </div>
                     <div class="flex items-center gap-3">
                         <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
@@ -549,8 +549,8 @@
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                         <p class="px-5 md:px-6 pb-5 md:pb-6 text-sm text-neutral-400 font-light leading-relaxed space-y-3">
-                            <span class="block">180 looks for virtually any occasion, built from 15 foundational garments — 3 top layers, 4 mid layers, 5 base layers, and 3 pairs of trousers — that all work together. Everything arrives in a single delivery.</span>
-                            <span class="block">Pieces are sourced from a curated mix of quality menswear brands (we deliberately avoid fast fashion), so the exact brand behind any given garment may vary slightly capsule to capsule depending on sizing and availability at the time of your order — the fabric, colour, and fit specification always stay consistent.</span>
+                            <span class="block">180 looks for virtually any occasion, built from 15 foundational garments — 3 outerwear pieces, 4 mid layers, 5 base layers, and 3 pairs of pants — that all work together. Everything arrives in a single delivery.</span>
+                            <span class="block">Pieces are sourced from a curated mix of quality menswear brands (we deliberately avoid fast fashion), so the exact brand behind any given garment may vary slightly capsule to capsule depending on sizing and availability at the time of your order.</span>
                         </p>
                     </div>
                 </div>
@@ -562,9 +562,9 @@
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                         <p class="px-5 md:px-6 pb-5 md:pb-6 text-sm text-neutral-400 font-light leading-relaxed space-y-3">
-                            <span class="block">The math is exact: 3 top layers × 4 mid layers × 5 base layers × 3 trousers = 180 combinations. Every pairing is intentional, not incidental. The point isn't 180 wildly different outfits — it's versatility. Every one of them looks sharp and suits the moment, from a morning meeting to a late dinner, so you never have to think twice about what to wear.</span>
-                            <span class="block">Each piece was designed as part of one coordinated colour and fabric system — a warm neutral palette of charcoal, black, navy, grey, brown, white, light blue, and moss green — so any top layer sits comfortably over any mid layer, over any base layer, above any pair of trousers. That's why there are no "wrong" combinations to avoid.</span>
-                            <span class="block">It also means the capsule flexes with the weather: on the coldest days, wear all four layers together; on a milder or heated-indoor day, shed the outer layer and the mid layer becomes your top. Try the interactive lookbook above to click through all 180 looks yourself.</span>
+                            <span class="block">The math is exact: 3 outerwear × 4 mid layers × 5 base layers × 3 pants = 180 combinations. Every pairing is intentional, not incidental. The point isn't 180 wildly different outfits — it's versatility. Every one of them looks sharp and suits the moment, from a morning meeting to a late dinner, so you never have to think twice about what to wear.</span>
+                            <span class="block">Each piece was designed as part of one coordinated colour and fabric system — a warm neutral palette of charcoal, black, navy, grey, brown, white, light blue, and moss green — so any outerwear piece sits comfortably over any mid layer, over any base layer, above any pair of pants. That's why there are no "wrong" combinations to avoid.</span>
+                            <span class="block">It also means the capsule flexes with the weather: on the coldest days, wear all four layers together; on a milder or heated-indoor day, shed the outerwear and the mid layer becomes your top. Try the interactive lookbook above to click through all 180 looks yourself.</span>
                         </p>
                     </div>
                 </div>
@@ -588,7 +588,7 @@
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                         <p class="px-5 md:px-6 pb-5 md:pb-6 text-sm text-neutral-400 font-light leading-relaxed">
-                            Reach out to our team once your capsule has arrived and you've had a chance to try everything on — we're happy to arrange a full return of the whole package. Because the capsule is designed to work together as one interlocking system, a piecemeal exchange of just one piece can be difficult to accommodate, but we'll always do our best to make it right for you.
+                            Try everything on first, in as many combinations as you like. If it isn't working, reach out to our team within 14 calendar days of delivery and we're happy to arrange a full return of the whole package (a $100 return shipping fee applies). Because the capsule is designed to work together as one interlocking system, a piecemeal exchange of just one piece can be difficult to accommodate, but we'll always do our best to make it right for you.
                         </p>
                     </div>
                 </div>
@@ -612,7 +612,7 @@
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                         <p class="px-5 md:px-6 pb-5 md:pb-6 text-sm text-neutral-400 font-light leading-relaxed">
-                            The current release ships November 2026, arriving in a single hard-shell carry-on delivered to your door — complimentary across the Greater Toronto Area.
+                            The current release ships November 2026, arriving in a single hard-shell carry-on delivered to your door. The $100 delivery charge across the Greater Toronto Area is included in the $3,999 price.
                         </p>
                     </div>
                 </div>
@@ -648,7 +648,7 @@
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                         <p class="px-5 md:px-6 pb-5 md:pb-6 text-sm text-neutral-400 font-light leading-relaxed">
-                            It's one of our most requested gifts for graduations, new jobs, relocations, and holidays — a complete, ready-to-wear wardrobe rather than a single item. If it's a surprise, you can enter your best estimate of their height, weight, and age at checkout, or gift the capsule and have them submit their own measurements before it ships.
+                            It's one of our most requested gifts for graduations, new jobs, relocations, and holidays — a complete, ready-to-wear wardrobe rather than a single item. You don't need to know their size: after you order, we send the recipient a follow-up email to collect their sizing details, and the capsule ships once we have them.
                         </p>
                     </div>
                 </div>
@@ -660,7 +660,7 @@
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                         <p class="px-5 md:px-6 pb-5 md:pb-6 text-sm text-neutral-400 font-light leading-relaxed">
-                            We stand behind every piece. If something isn't right, contact our team within the return window noted in your confirmation email — since the capsule is designed to work together as one system, this is typically handled as a full return of the whole package rather than a piecemeal exchange, and we'll always do our best to make it right.
+                            You have 14 calendar days from delivery to return your capsule. We encourage you to try on every piece, in as many combinations as you like — that's the best way to see how the system works together. To qualify for a return, the clothing must be unworn and unwashed, with tags still attached on every piece that arrived tagged. A $100 return shipping fee is charged on returns. Since the capsule is designed to work together as one system, this is typically handled as a full return of the whole package rather than a piecemeal exchange. If something isn't right, contact our team within the 14 days and we'll always do our best to make it right.
                         </p>
                     </div>
                 </div>
@@ -709,7 +709,7 @@
         // Looks that have a finished render (look number -> file in looks/renders/).
         // Regenerated by build_site.py from the renders folder - don't edit by hand.
         // LOOK_RENDERS:START
-        const LOOK_RENDERS = {"1": "render_001.jpg", "2": "render_002.jpg", "3": "render_003.jpg", "4": "render_004.jpg", "5": "render_005.jpg", "6": "render_006.jpg", "7": "render_007.jpg", "11": "render_011.jpg", "12": "render_012.jpg", "13": "render_013.jpg", "25": "render_025.jpg", "35": "render_035.jpg", "47": "render_047.jpg", "52": "render_052.jpg", "61": "render_061.jpg", "62": "render_062.jpg", "64": "render_064.jpg", "67": "render_067.jpg", "72": "render_072.jpg", "75": "render_075.jpg", "81": "render_081.jpg", "87": "render_087.jpg", "101": "render_101.jpg", "108": "render_108.jpg", "114": "render_114.jpg", "118": "render_118.jpg", "134": "render_134.jpg", "135": "render_135.jpg", "136": "render_136.jpg", "145": "render_145.jpg", "148": "render_148.jpg", "156": "render_156.jpg", "157": "render_157.jpg", "170": "render_170.jpg", "172": "render_172.jpg"};
+        const LOOK_RENDERS = {"1": "render_001.jpg", "2": "render_002.jpg", "3": "render_003.jpg", "4": "render_004.jpg", "5": "render_005.jpg", "6": "render_006.jpg", "7": "render_007.jpg", "9": "render_009.jpg", "10": "render_010.jpg", "11": "render_011.jpg", "12": "render_012.jpg", "13": "render_013.jpg", "14": "render_014.jpg", "17": "render_017.jpg", "18": "render_018.jpg", "19": "render_019.jpg", "21": "render_021.jpg", "25": "render_025.jpg", "29": "render_029.jpg", "33": "render_033.jpg", "35": "render_035.jpg", "39": "render_039.jpg", "42": "render_042.jpg", "44": "render_044.jpg", "47": "render_047.jpg", "48": "render_048.jpg", "51": "render_051.jpg", "52": "render_052.jpg", "53": "render_053.jpg", "54": "render_054.jpg", "56": "render_056.jpg", "59": "render_059.jpg", "61": "render_061.jpg", "62": "render_062.jpg", "64": "render_064.jpg", "65": "render_065.jpg", "67": "render_067.jpg", "68": "render_068.jpg", "71": "render_071.jpg", "72": "render_072.jpg", "73": "render_073.jpg", "74": "render_074.jpg", "75": "render_075.jpg", "80": "render_080.jpg", "81": "render_081.jpg", "82": "render_082.jpg", "83": "render_083.jpg", "84": "render_084.jpg", "87": "render_087.jpg", "88": "render_088.jpg", "90": "render_090.jpg", "92": "render_092.jpg", "93": "render_093.jpg", "94": "render_094.jpg", "99": "render_099.jpg", "100": "render_100.jpg", "101": "render_101.jpg", "107": "render_107.jpg", "108": "render_108.jpg", "109": "render_109.jpg", "114": "render_114.jpg", "116": "render_116.jpg", "117": "render_117.jpg", "118": "render_118.jpg", "121": "render_121.jpg", "124": "render_124.jpg", "130": "render_130.jpg", "133": "render_133.jpg", "134": "render_134.jpg", "135": "render_135.jpg", "136": "render_136.jpg", "137": "render_137.jpg", "141": "render_141.jpg", "144": "render_144.jpg", "145": "render_145.jpg", "148": "render_148.jpg", "149": "render_149.jpg", "151": "render_151.jpg", "153": "render_153.jpg", "155": "render_155.jpg", "156": "render_156.jpg", "157": "render_157.jpg", "158": "render_158.jpg", "159": "render_159.jpg", "161": "render_161.jpg", "162": "render_162.jpg", "163": "render_163.jpg", "165": "render_165.jpg", "169": "render_169.jpg", "170": "render_170.jpg", "172": "render_172.jpg", "174": "render_174.jpg", "175": "render_175.jpg", "176": "render_176.jpg", "178": "render_178.jpg", "180": "render_180.jpg"};
         // LOOK_RENDERS:END
 
         // Jump to a random look that has a finished render (different from the current one) and sync all four selectors
@@ -817,7 +817,7 @@
             "Lucas is wearing a charcoal mohair overcoat, a navy cotton-wool blend overshirt, a navy silky cotton tee and navy corduroy straight pants.",
             "Leo is wearing a charcoal mohair overcoat, a navy cotton-wool blend overshirt, a navy silky cotton tee and brown tech-fabric stretch trousers.",
             "Oscar is wearing a charcoal mohair overcoat, a navy cotton-wool blend overshirt, a black merino wool tee and grey denim jeans.",
-            "Finn is wearing a charcoal mohair overcoat, a navy cotton-wool blend overshirt, a black merino wool tee and navy corduroy straight pants.",
+            "Aaron is wearing a charcoal mohair overcoat, a navy cotton-wool blend overshirt, a black merino wool tee and navy corduroy straight pants.",
             "Theo is wearing a charcoal mohair overcoat, a navy cotton-wool blend overshirt, a black merino wool tee and brown tech-fabric stretch trousers.",
             "Ian is wearing a black down jacket, a navy shawl-collar cardigan, a white dress shirt and grey denim jeans.",
             "Kevin is wearing a black down jacket, a navy shawl-collar cardigan, a white dress shirt and navy corduroy straight pants.",
@@ -832,7 +832,7 @@
             "Grant is wearing a black down jacket, a navy shawl-collar cardigan, a navy silky cotton tee and navy corduroy straight pants.",
             "Quinn is wearing a black down jacket, a navy shawl-collar cardigan, a navy silky cotton tee and brown tech-fabric stretch trousers.",
             "Max is wearing a black down jacket, a navy shawl-collar cardigan, a black merino wool tee and grey denim jeans.",
-            "Ryan is wearing a black down jacket, a navy shawl-collar cardigan, a black merino wool tee and navy corduroy straight pants.",
+            "Frank is wearing a black down jacket, a navy shawl-collar cardigan, a black merino wool tee and navy corduroy straight pants.",
             "Owen is wearing a black down jacket, a navy shawl-collar cardigan, a black merino wool tee and brown tech-fabric stretch trousers.",
             "Tom is wearing a black down jacket, a grey cashmere crewneck, a white dress shirt and grey denim jeans.",
             "Hugo is wearing a black down jacket, a grey cashmere crewneck, a white dress shirt and navy corduroy straight pants.",
@@ -887,10 +887,10 @@
             "Owen is wearing a black wool blazer, a navy shawl-collar cardigan, a light blue dress shirt and brown tech-fabric stretch trousers.",
             "Reid is wearing a black wool blazer, a navy shawl-collar cardigan, a moss green micro-textured polo and grey denim jeans.",
             "Andre is wearing a black wool blazer, a navy shawl-collar cardigan, a moss green micro-textured polo and navy corduroy straight pants.",
-            "Frank is wearing a black wool blazer, a navy shawl-collar cardigan, a moss green micro-textured polo and brown tech-fabric stretch trousers.",
+            "Ryan is wearing a black wool blazer, a navy shawl-collar cardigan, a moss green micro-textured polo and brown tech-fabric stretch trousers.",
             "Peter is wearing a black wool blazer, a navy shawl-collar cardigan, a navy silky cotton tee and grey denim jeans.",
             "Owen is wearing a black wool blazer, a navy shawl-collar cardigan, a navy silky cotton tee and navy corduroy straight pants.",
-            "Aaron is wearing a black wool blazer, a navy shawl-collar cardigan, a navy silky cotton tee and brown tech-fabric stretch trousers.",
+            "Finn is wearing a black wool blazer, a navy shawl-collar cardigan, a navy silky cotton tee and brown tech-fabric stretch trousers.",
             "Dean is wearing a black wool blazer, a navy shawl-collar cardigan, a black merino wool tee and grey denim jeans.",
             "Wes is wearing a black wool blazer, a navy shawl-collar cardigan, a black merino wool tee and navy corduroy straight pants.",
             "Finn is wearing a black wool blazer, a navy shawl-collar cardigan, a black merino wool tee and brown tech-fabric stretch trousers.",
@@ -978,6 +978,33 @@
                 chevron.classList.add('rotate-180');
             }
         }
+        // Occasion spinner in The Math: one occasion at a time, rolling up vertically.
+        // The window eases to each word's width so the centred equation glides rather than jumps.
+        (function () {
+            const word = document.querySelector('.occasion-spin-word');
+            if (!word) return;
+            const win = word.parentElement;
+            const items = JSON.parse(word.dataset.occasions || '[]');
+            const fit = () => { win.style.width = word.scrollWidth + 'px'; };
+            fit();
+            (document.fonts ? document.fonts.ready : Promise.resolve()).then(fit);
+            window.addEventListener('resize', fit);
+            if (items.length < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            let i = 0;
+            setInterval(() => {
+                if (document.hidden) return;
+                word.classList.add('is-leaving');
+                setTimeout(() => {
+                    i = (i + 1) % items.length;
+                    word.textContent = items[i];
+                    fit();
+                    word.classList.remove('is-leaving');
+                    word.classList.add('is-entering');
+                    void word.offsetWidth; // restart from below
+                    word.classList.remove('is-entering');
+                }, 380);
+            }, 2200);
+        })();
     </script>
 </body>
 </html>

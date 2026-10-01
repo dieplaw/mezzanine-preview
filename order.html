@@ -62,6 +62,8 @@
         .o-toggle small { display: block; color: #a3a3a3; font-weight: 300; font-size: 12px; margin-top: .2rem; line-height: 1.5; }
         .o-gift { display: none; margin-top: 1rem; }
         .o-gift.show { display: block; }
+        .o-hint { margin-top: .5rem; font-size: .75rem; color: #737373; font-weight: 300; }
+        .o-hint + .o-row { margin-top: .875rem; }
         .o-count { text-align: right; font-size: 11px; color: #737373; margin-top: .35rem; }
 
         .o-sum-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #fff; }
@@ -141,7 +143,7 @@
 
     <main class="o-wrap">
         <header class="o-head">
-            <span class="o-eyebrow">Limited Production Release</span>
+            <span class="o-eyebrow">Launch Edition · First Release</span>
             <h1 class="o-title text-gradient-serif">Order The Cold Weather Capsule</h1>
             <p class="o-sub">Tell us a little about who's wearing it and where it's going. You'll complete payment securely on the next step.</p>
         </header>
@@ -245,13 +247,19 @@
                             <span><strong>This is a gift</strong><small>Fit profile and delivery address should be the recipient's.</small></span>
                         </label>
                         <div class="o-gift" id="gift-fields">
-                            <div class="o-row">
+                            <div class="o-row c2">
                                 <div class="o-field">
                                     <label for="recipient">Recipient's name</label>
                                     <input class="o-input" id="recipient" name="gift_recipient">
                                     <p class="o-err" data-for="recipient">Please enter the recipient's name.</p>
                                 </div>
+                                <div class="o-field">
+                                    <label for="recipient_email">Recipient's email</label>
+                                    <input class="o-input" id="recipient_email" name="gift_recipient_email" type="email" autocomplete="off">
+                                    <p class="o-err" data-for="recipient_email">Please enter the recipient's email so they can confirm their size.</p>
+                                </div>
                             </div>
+                            <p class="o-hint">We'll email the recipient to confirm their size before anything ships.</p>
                             <div class="o-row">
                                 <div class="o-field">
                                     <label for="gift_message">Gift message <span class="opt">(optional)</span></label>
@@ -264,7 +272,7 @@
 
                     <section class="o-step">
                         <div class="o-step-head"><span class="o-step-num">04</span><h2 class="o-step-title" id="addr-title">Delivery address</h2></div>
-                        <p class="o-step-note">Complimentary delivery across the Greater Toronto Area.</p>
+                        <p class="o-step-note">$100 delivery across the Greater Toronto Area is included in the price.</p>
                         <div class="o-row c-addr">
                             <div class="o-field">
                                 <label for="street">Street address</label>
@@ -310,20 +318,20 @@
                     <h2 class="o-sum-title">The Cold Weather Capsule</h2>
                     <p class="o-sum-sub">180 looks, ready for anything. 15 high-quality garments.</p>
                     <ul class="o-list">
-                        <li>3 Top layers + 4 Mid layers + 5 Base layers + 3 Bottom layers</li>
-                        <li>Complimentary delivery across the Greater Toronto Area</li>
+                        <li>3 Outerwear + 4 Mid layers + 5 Base layers + 3 Pants</li>
+                        <li>$100 delivery across the Greater Toronto Area, included in the price</li>
                         <li>Hard-shell carry-on for secure delivery and eco-friendly unboxing</li>
                     </ul>
                     <div class="o-lines">
                         <div class="o-line"><span>Capsule</span><span>$3,999.00</span></div>
-                        <div class="o-line"><span>GTA delivery</span><span>Free</span></div>
+                        <div class="o-line"><span>GTA delivery ($100)</span><span>Included</span></div>
                         <div class="o-line"><span>HST (13%)</span><span>$519.87</span></div>
                         <div class="o-line total"><span>Total</span><span>$4,518.87</span></div>
                     </div>
                     <div class="o-ship">Shipping November 2026</div>
                     <button type="submit" class="o-btn" id="submit-btn">Continue to payment</button>
                     <div class="o-status" id="status" role="alert"></div>
-                    <p class="o-fine">Payment is processed securely by Stripe. Prices in CAD.</p>
+                    <p class="o-fine">Payment is processed securely by Stripe. Prices in CAD.<br>14-day returns from delivery: unworn, unwashed, tags attached. $100 return shipping fee applies.</p>
                 </aside>
 
             </div>
@@ -446,6 +454,8 @@
                 checks.push(touched[key]);
             });
             checks.push(setError('recipient', [$('recipient')], giftBox.checked && !$('recipient').value.trim()));
+            const recEmail = $('recipient_email').value.trim();
+            checks.push(setError('recipient_email', [$('recipient_email')], giftBox.checked && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recEmail)));
             checks.push(setError('street', [$('street')], !$('street').value.trim()));
 
             const city = $('city').value;

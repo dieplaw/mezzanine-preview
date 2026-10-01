@@ -46,7 +46,7 @@ p{text-wrap:pretty}
 .meter-label>span{white-space:nowrap}
 .meter-label>span:last-child{margin-left:auto}
 @media (max-width:639px){
-.math-head{flex-direction:column;align-items:flex-start;gap:.5rem}
+.math-head{flex-direction:column;align-items:center;gap:.5rem}
 .math-cards{gap:.75rem}
 .math-cards>div{padding:1rem}
 .math-cards>div>div:first-child{font-size:1.25rem;line-height:1.3}
@@ -57,3 +57,11 @@ p{text-wrap:pretty}
 /* Occasion tags under the lookbook intro */
 .occasion-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;padding-top:.75rem;max-width:40rem;margin-left:auto;margin-right:auto}
 .occasion-row span{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#a3a3a3;padding:.35rem .7rem;border:1px solid #262626;border-radius:9999px;background:rgba(23,23,23,.6);white-space:nowrap}
+.math-head-center{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.35rem;margin-bottom:1.75rem}
+.math-equation{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;column-gap:.6rem;row-gap:.1rem;margin-top:.6rem}
+.math-eq-formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem;letter-spacing:.04em;color:#fbbf24;white-space:nowrap}
+.occasion-spin-window{display:inline-block;height:2.1rem;overflow:hidden;vertical-align:bottom;text-align:left;transition:width .38s cubic-bezier(.4,0,.2,1);-webkit-mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent)}
+.occasion-spin-word{display:inline-block;font-family:"Instrument Serif","Playfair Display",serif;font-style:italic;font-size:1.6rem;line-height:2.1rem;color:#fbbf24;white-space:nowrap;transform:translateY(0);opacity:1;transition:transform .38s cubic-bezier(.4,0,.2,1),opacity .38s ease}
+.occasion-spin-word.is-leaving{transform:translateY(-100%);opacity:0}
+.occasion-spin-word.is-entering{transform:translateY(100%);opacity:0;transition:none}
+@media (min-width:768px){.math-eq-formula{font-size:.9rem}.occasion-spin-window{height:2.4rem}.occasion-spin-word{font-size:1.9rem;line-height:2.4rem}}
