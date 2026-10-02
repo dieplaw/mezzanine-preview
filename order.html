@@ -211,7 +211,7 @@
                                 <div class="fp-ctrl">
                                     <button type="button" class="fp-step" data-dir="-1" aria-label="Decrease weight">−</button>
                                     <div class="fp-track">
-                                        <input type="range" class="fp-range" id="weight" min="100" max="320" step="1" value="170">
+                                        <input type="range" class="fp-range" id="weight" min="100" max="295" step="5" value="170">
                                         <div class="fp-ticks" id="weight-ticks"></div>
                                     </div>
                                     <button type="button" class="fp-step" data-dir="1" aria-label="Increase weight">+</button>
@@ -227,14 +227,14 @@
                                     </div>
                                 </div>
                                 <div class="fp-ctrl">
-                                    <button type="button" class="fp-step" data-dir="-1" aria-label="Decrease age">−</button>
+                                    <button type="button" class="fp-step" data-dir="-1" aria-label="Younger age range">−</button>
                                     <div class="fp-track">
-                                        <input type="range" class="fp-range" id="age" min="16" max="80" step="1" value="32">
+                                        <input type="range" class="fp-range" id="age" min="20" max="65" step="5" value="30">
                                         <div class="fp-ticks" id="age-ticks"></div>
                                     </div>
-                                    <button type="button" class="fp-step" data-dir="1" aria-label="Increase age">+</button>
+                                    <button type="button" class="fp-step" data-dir="1" aria-label="Older age range">+</button>
                                 </div>
-                                <p class="fp-err" data-for="age">Please set age.</p>
+                                <p class="fp-err" data-for="age">Please set an age range.</p>
                             </div>
                         </div>
                     </section>
@@ -374,6 +374,9 @@
         });
 
         /* ---------- Fit profile sliders ---------- */
+        const ageRange = (v) => (v >= 65 ? '65+' : `${v}–${v + 4}`);
+        const kg = (lb) => Math.round(lb * 0.45359237);
+        const weightRange = (v) => `${v}–${v + 4}`;
         const ftIn = (inches) => `${Math.floor(inches / 12)}′${inches % 12}″`;
         const MEASURES = {
             height: {
@@ -382,14 +385,14 @@
                 ticks: [[60, '5′0″'], [66, '5′6″', true], [72, '6′0″'], [78, '6′6″', true]]
             },
             weight: {
-                main: (v) => `${v}<small>lb</small>`,
-                alt: (v) => `${Math.round(v * 0.45359237)} KG`,
-                ticks: [[100, '100'], [150, '150', true], [200, '200'], [250, '250', true], [300, '300']]
+                main: (v) => `${weightRange(v)}<small>lb</small>`,
+                alt: (v) => `${kg(v)}–${kg(v + 4)} KG`,
+                ticks: [[100, '100'], [150, '150', true], [200, '200'], [250, '250', true]]
             },
             age: {
-                main: (v) => `${v}<small>yrs</small>`,
+                main: (v) => `${ageRange(v)}<small>yrs</small>`,
                 alt: () => '&nbsp;',
-                ticks: [[20, '20'], [30, '30', true], [40, '40'], [50, '50', true], [60, '60'], [70, '70', true]]
+                ticks: [[20, '20s'], [30, '30s', true], [40, '40s'], [50, '50s', true], [60, '60s'], [65, '65+', true]]
             }
         };
         const touched = { height: false, weight: false, age: false };
@@ -421,7 +424,7 @@
             el.addEventListener('keydown', () => { if (!touched[key]) touch(key); });
             $(`fp-${key}`).querySelectorAll('.fp-step').forEach((btn) => {
                 btn.addEventListener('click', () => {
-                    if (touched[key]) el.value = Math.min(max, Math.max(min, Number(el.value) + Number(btn.dataset.dir)));
+                    if (touched[key]) el.value = Math.min(max, Math.max(min, Number(el.value) + Number(btn.dataset.dir) * (Number(el.step) || 1)));
                     touch(key);
                 });
             });
@@ -497,8 +500,8 @@
             data.province = 'ON';
             const h = Number($('height').value), w = Number($('weight').value);
             data.height = `${ftIn(h).replace('′', "'").replace('″', '"')} (${Math.round(h * 2.54)} cm)`;
-            data.weight = `${w} lb (${Math.round(w * 0.45359237)} kg)`;
-            data.age = $('age').value;
+            data.weight = `${w}–${w + 4} lb (${kg(w)}–${kg(w + 4)} kg)`;
+            data.age = ageRange(Number($('age').value));
             data.order_reference = ref;
             data.product = 'The Cold Weather Capsule — $3,999 CAD + HST';
             data._subject = `New order ${ref} — ${data.name}`;
