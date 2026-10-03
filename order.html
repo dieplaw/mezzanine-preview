@@ -316,17 +316,17 @@
                 <!-- Right: summary -->
                 <aside class="o-summary o-card glass-panel">
                     <h2 class="o-sum-title">The Cold Weather Capsule</h2>
-                    <p class="o-sum-sub">180 looks, ready for the north.</p>
+                    <p class="o-sum-sub">180 looks, designed for Toronto.</p>
                     <ul class="o-list">
                         <li>15 high-quality garments</li>
                         <li>$100 delivery across the Greater Toronto Area, included in the price</li>
                         <li>Reusable storage tote for secure delivery and eco-friendly unboxing</li>
                     </ul>
                     <div class="o-lines">
-                        <div class="o-line"><span>Capsule</span><span>$3,999.00</span></div>
+                        <div class="o-line"><span>Capsule</span><span>$4,000.00</span></div>
                         <div class="o-line"><span>GTA delivery ($100)</span><span>Included</span></div>
-                        <div class="o-line"><span>HST (13%)</span><span>$519.87</span></div>
-                        <div class="o-line total"><span>Total</span><span>$4,518.87</span></div>
+                        <div class="o-line"><span>HST (13%)</span><span>$520.00</span></div>
+                        <div class="o-line total"><span>Total</span><span>$4,520.00</span></div>
                     </div>
                     <div class="o-ship">Shipping November 2026</div>
                     <button type="submit" class="o-btn" id="submit-btn">Continue to payment</button>
@@ -346,7 +346,7 @@
            ------------------------------------------------------------
            STRIPE_PAYMENT_LINK: the Payment Link URL from your Stripe
              dashboard (Payment Links → New → The Cold Weather Capsule,
-             $3,999 CAD, with HST handled by Stripe Tax or a tax rate).
+             $4,000 CAD, with HST handled by Stripe Tax or a tax rate).
              e.g. 'https://buy.stripe.com/abc123XYZ'
            ORDER_DETAILS_ENDPOINT: where the fit profile / address /
              gift details are sent, e.g. a Formspree form URL
@@ -503,7 +503,7 @@
             data.weight = `${w}–${w + 4} lb (${kg(w)}–${kg(w + 4)} kg)`;
             data.age = ageRange(Number($('age').value));
             data.order_reference = ref;
-            data.product = 'The Cold Weather Capsule — $3,999 CAD + HST';
+            data.product = 'The Cold Weather Capsule — $4,000 CAD + HST';
             data._subject = `New order ${ref} — ${data.name}`;
 
             if (!STRIPE_PAYMENT_LINK || !ORDER_DETAILS_ENDPOINT) {
