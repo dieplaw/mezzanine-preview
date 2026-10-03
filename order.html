@@ -14,13 +14,11 @@
         .o-nav { position: sticky; top: 0; z-index: 50; }
         .o-nav-inner { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; height: 4rem; display: flex; align-items: center; justify-content: space-between; font-size: 12px; }
         .o-brand { font-family: 'Playfair Display', serif; font-size: 1.25rem; letter-spacing: .1em; font-weight: 700; color: #fff; }
-        .o-back { color: #a3a3a3; transition: color .2s; }
-        .o-back:hover { color: #fff; }
 
         .o-wrap { max-width: 72rem; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
         .o-head { text-align: center; max-width: 40rem; margin: 0 auto 3rem; }
-        .o-eyebrow { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #a3a3a3; }
-        .o-title { font-family: 'Playfair Display', serif; font-size: clamp(2.25rem, 6vw, 3.75rem); line-height: 1.05; margin: 1rem 0; }
+        .o-title { font-family: 'Playfair Display', serif; font-size: clamp(1.875rem, 5vw, 3rem); line-height: 1.1; margin: 0 0 1rem; }
+        .o-title-blue { background: linear-gradient(135deg, #f4f9ff 0%, #c6dcf1 45%, #7fa9d4 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
         .o-sub { color: #a3a3a3; font-weight: 300; font-size: 1rem; line-height: 1.6; }
 
         .o-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: start; }
@@ -137,14 +135,12 @@
     <nav class="o-nav glass-nav">
         <div class="o-nav-inner">
             <a href="index.html" class="o-brand">MEZZANINE</a>
-            <a href="index.html" class="o-back">← Back to the capsule</a>
         </div>
     </nav>
 
     <main class="o-wrap">
         <header class="o-head">
-            <span class="o-eyebrow">Toronto Edition · First Release</span>
-            <h1 class="o-title text-gradient-serif">Order The Cold Weather Capsule</h1>
+            <h1 class="o-title o-title-blue">Order details</h1>
             <p class="o-sub">Tell us a little about who's wearing it and where it's going. You'll complete payment securely on the next step.</p>
         </header>
 
