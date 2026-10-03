@@ -35,6 +35,7 @@
 .look-shuffle:hover{background:rgba(10,10,12,.65);border-color:rgba(255,255,255,.45);transform:scale(1.05)}
 .look-shuffle:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .look-shuffle.spin svg{animation:lookSpin .5s ease-out}
+.look-shuffle.loading svg{animation:lookSpin .7s linear infinite}
 @keyframes lookSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.look-shuffle.spin svg{animation:none}}
 
